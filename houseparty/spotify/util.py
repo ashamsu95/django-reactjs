@@ -16,7 +16,7 @@ def update_or_create_user_tokens(sessions_id,access_token,token_type,expires_in,
     tokens = get_user_tokens(sessions_id)
     expires_in = timezone.now() + timedelta(seconds=expires_in)
 
-    if token:
+    if tokens:
         tokens.access_token = access_token
         tokens.refresh_token = refresh_token
         tokens.expires_in = expires_in
@@ -29,7 +29,7 @@ def update_or_create_user_tokens(sessions_id,access_token,token_type,expires_in,
 def is_spotify_authenticated(sessions_id):
     tokens = get_user_tokens(sessions_id)
     if tokens:
-        expiry = tokens.expires_in
+        expire = tokens.expires_in
         if expire <= timezone.now():
             refresh_spotify_token(sessions_id)
         return True
