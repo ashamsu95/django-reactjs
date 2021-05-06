@@ -35,8 +35,11 @@ class JoinRoom(APIView):
             self.request.session.create()
 
         code = request.data.get(self.lookup_url_kwarg)
+        print(code)
         if code != None:
             room_result = Room.objects.filter(code=code)
+            print(room_result)
+
             if len(room_result) > 0:
                 room = room_result[0]
                 self.request.session['room_code'] = code
@@ -73,6 +76,7 @@ class CreateRoomView(APIView):
                 room = Room(host=host,guest_can_pause=guest_can_pause,votes_to_skip=votes_to_skip)
                 room.save()           
                 self.request.session['room_code'] = room.code
+                
 
                 return Response(RoomSerializer(room).data,status=status.HTTP_201_CREATED)
         

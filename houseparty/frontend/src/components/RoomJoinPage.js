@@ -6,8 +6,8 @@ export default class RoomJoinPage extends Component{
     constructor(props){
         super(props);
         this.state = {
-            roomCode: " ",
-            error:" ",
+            roomCode: "",
+            error:"",
         }
         this.handleTextFieldChange = this.handleTextFieldChange.bind(this);
         this.handleButtonPressed = this.handleButtonPressed.bind(this);
